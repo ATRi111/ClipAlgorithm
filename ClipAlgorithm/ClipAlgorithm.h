@@ -4,8 +4,3 @@
 #include<iostream>
 using namespace std;
 
-class CohenSutherlandAlgorithm : public Solution
-{
-
-};
-

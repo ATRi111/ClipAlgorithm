@@ -18,14 +18,8 @@
     <ClInclude Include="ClipAlgorithm.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ClipAlgorithm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
