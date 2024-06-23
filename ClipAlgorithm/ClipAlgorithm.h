@@ -1,12 +1,19 @@
 #pragma once
-#include "Test.h"
+#include"Test.h"
+#include"Vector2.h"
 #include<vector>
 #include<iostream>
-using namespace std;
 
 class ClipAlgorithm : Solution
 {
 public:
-	float xMin, yMin, xMax, yMax;
+	TestAnsnwer Run(TestCase t) override
+	{
+
+	}
+	vector<Vector2> Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
+	{
+
+	}
 
 };

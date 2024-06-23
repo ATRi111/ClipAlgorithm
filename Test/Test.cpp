@@ -1,47 +1,11 @@
 #include"Test.h"
+#include"Stopwatch.h"
+#include<vector>
+using namespace std;
 
-StopWatch::StopWatch(bool start = true) :nanoseconds(0), paused(!start)
+bool TestAnsnwer::Match(TestAnsnwer other) const
 {
-	if (start)
-		timePoint = high_resolution_clock::now();
-}
-void StopWatch::Reset()
-{
-	paused = true;
-	nanoseconds = 0;
-}
-void StopWatch::Restart()
-{
-	Reset();
-	Start();
-}
-void StopWatch::Start()
-{
-	if (paused)
-	{
-		paused = false;
-		timePoint = high_resolution_clock::now();
-	}
-}
-void StopWatch::Pause()
-{
-	time_point<steady_clock> temp = high_resolution_clock::now();
-	if (!paused)
-	{
-		paused = true;
-		nanoseconds += (temp - timePoint).count();
-	}
-}
-long long StopWatch::NanoSeconds() const
-{
-	time_point<steady_clock> temp = high_resolution_clock::now();
-	if (!paused)
-		return nanoseconds + (temp - timePoint).count();
-	return nanoseconds;
-}
-double StopWatch::Milliseconds() const
-{
-	return NanoSeconds() / 1e6;
+	return true;
 }
 
 Solution Solution::CreateDefaultSolution()
@@ -50,43 +14,40 @@ Solution Solution::CreateDefaultSolution()
 }
 double Solution::TimeTest(TestCase t)
 {
-	StopWatch timer;
+	Stopwatch timer;
 	timer.Start();
 	Run(t);
 	timer.Pause();
 	return timer.Milliseconds();
 }
-bool Solution::CorrectnessTest(TestCase t)
+TestAnsnwer Solution::Run(TestCase t)
 {
-	return false;
-}
-void Solution::Run(TestCase t)
-{
-
+	return TestAnsnwer();
 }
 
-TestLauncher::TestLauncher(const vector<TestCase>& set, const function<Solution()>& CreateSolution)
-	:set(set), CreateSolution(CreateSolution)
+TestLauncher::TestLauncher(const vector<TestCase>& cases, const vector<TestAnsnwer>& answers, const function<Solution()>& CreateSolution)
+	:cases(cases),answers(answers),CreateSolution(CreateSolution)
 {
 
 }
 double TestLauncher::TimeTest()
 {
 	double sum = 0.0;
-	for (int i = 0; i < set.size(); i++)
+	for (int i = 0; i < cases.size(); i++)
 	{
 		Solution s = CreateSolution();
-		sum += s.TimeTest(set[i]);
+		sum += s.TimeTest(cases[i]);
 	}
 	return sum;
 }
 double TestLauncher::CorrectnessTest()
 {
 	double sum = 0.0;
-	for (int i = 0; i < set.size(); i++)
+	for (int i = 0; i < cases.size(); i++)
 	{
 		Solution s = CreateSolution();
-		sum += s.CorrectnessTest(set[i]);
+		TestAnsnwer answer = s.Run(cases[i]);
+		sum += answers[i].Match(answer);
 	}
-	return sum / set.size();
+	return sum / cases.size();
 }

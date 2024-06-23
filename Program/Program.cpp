@@ -2,6 +2,7 @@
 #include<vector>
 #include"Vector2.h"
 #include"Test.h"
+using namespace std;
 
 int main()
 {
@@ -15,7 +16,8 @@ int main()
 	{
 		set.emplace_back();
 	}
-	TestLauncher launcher(set, Solution::CreateDefaultSolution);
+	vector<TestAnsnwer> empty;
+	TestLauncher launcher(set, empty, Solution::CreateDefaultSolution);
 	double ms = launcher.TimeTest();
 	cout << ms << endl;
 }
