@@ -19,7 +19,7 @@ class Solution
 protected:
 
 public:
-	static Solution CreateDefaultSolution();
+	static Solution* CreateDefaultSolution();
 	double TimeTest(TestCase* t);
 	virtual TestAnswer* Run(TestCase* t);
 };
@@ -29,9 +29,9 @@ class TestLauncher
 {
 	const std::vector<TestCase*>& cases;
 	const std::vector<TestAnswer*>& answers;
-	std::function<Solution()> CreateSolution;
+	std::function<Solution*()> CreateSolution;
 public:
-	TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution()>& CreateSolution);
+	TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution*()>& CreateSolution);
 	double TimeTest();
 	double CorrectnessTest();
 };
