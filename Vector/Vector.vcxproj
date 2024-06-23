@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{80fe6401-ea3a-4784-a983-0f0c9e98f5c7}</ProjectGuid>
-    <RootNamespace>ClipAlgorithm</RootNamespace>
+    <ProjectGuid>{e3b1ffc2-7d66-4617-9307-ec6d06b14657}</ProjectGuid>
+    <RootNamespace>Vector</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -104,7 +104,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Test\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,18 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ClipAlgorithm.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClipAlgorithm.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Test\Test.vcxproj">
-      <Project>{04f4c397-07fb-45a5-8e6f-dcedaf6da7bd}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Vector\Vector.vcxproj">
-      <Project>{e3b1ffc2-7d66-4617-9307-ec6d06b14657}</Project>
-    </ProjectReference>
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
