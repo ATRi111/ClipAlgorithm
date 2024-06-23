@@ -1,10 +1,15 @@
 #include<iostream>
-#include"Test.h"
 #include<vector>
+#include"Vector2.h"
+#include"Test.h"
 
 int main()
 {
-	int n = 1000000;
+	Vector2 v1 = Vector2(0, 1);
+	Vector2 v2 = Vector2(-1, 1);
+	v2 = v2 + v1;
+
+	int n = 100;
 	vector<TestCase> set;
 	for (int i = 0; i < n; i++)
 	{
