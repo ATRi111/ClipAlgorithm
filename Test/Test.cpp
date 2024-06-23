@@ -3,7 +3,11 @@
 #include<vector>
 using namespace std;
 
-bool TestAnsnwer::Match(TestAnsnwer other) const
+TestAnswer::~TestAnswer()
+{
+
+}
+bool TestAnswer::Match(TestAnswer* other) const
 {
 	return true;
 }
@@ -12,7 +16,7 @@ Solution Solution::CreateDefaultSolution()
 {
 	return Solution();
 }
-double Solution::TimeTest(TestCase t)
+double Solution::TimeTest(TestCase* t)
 {
 	Stopwatch timer;
 	timer.Start();
@@ -20,12 +24,12 @@ double Solution::TimeTest(TestCase t)
 	timer.Pause();
 	return timer.Milliseconds();
 }
-TestAnsnwer Solution::Run(TestCase t)
+TestAnswer* Solution::Run(TestCase* t)
 {
-	return TestAnsnwer();
+	return new TestAnswer();
 }
 
-TestLauncher::TestLauncher(const vector<TestCase>& cases, const vector<TestAnsnwer>& answers, const function<Solution()>& CreateSolution)
+TestLauncher::TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution()>& CreateSolution)
 	:cases(cases),answers(answers),CreateSolution(CreateSolution)
 {
 
@@ -42,12 +46,15 @@ double TestLauncher::TimeTest()
 }
 double TestLauncher::CorrectnessTest()
 {
+	if (answers.size() != cases.size())
+		return 0.0f;
 	double sum = 0.0;
 	for (int i = 0; i < cases.size(); i++)
 	{
 		Solution s = CreateSolution();
-		TestAnsnwer answer = s.Run(cases[i]);
-		sum += answers[i].Match(answer);
+		TestAnswer* answer = s.Run(cases[i]);
+		sum += answers[i]->Match(answer);
+		delete answer;
 	}
 	return sum / cases.size();
 }
