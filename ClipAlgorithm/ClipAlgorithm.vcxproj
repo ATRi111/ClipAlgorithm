@@ -129,9 +129,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ClipAlgorithm.h" />
+    <ClInclude Include="LiangBarskyAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClipAlgorithm.cpp" />
+    <ClCompile Include="LiangBarskyAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Test\Test.vcxproj">

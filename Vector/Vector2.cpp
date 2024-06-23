@@ -13,13 +13,16 @@ Vector2::Vector2() :x(0.0f), y(0.0f)
 {
 
 }
-Vector2::Vector2(float x, float y) :x(x), y(y)
+Vector2::Vector2(float x, float y) 
+	:x(x), y(y)
 {
 
 }
-Vector2 Vector2::operator=(const Vector2& v) const
+Vector2& Vector2::operator=(const Vector2& v)
 {
-	return Vector2(v.x, v.y);
+	x = v.x;
+	y = v.y;
+	return *this;
 }
 bool Vector2::operator==(const Vector2& v) const
 {
@@ -63,6 +66,6 @@ Vector2 operator/(Vector2 v, float f)
 }
 ostream& operator<<(ostream& stream, const Vector2& v)
 {
-	stream << "(" << v.x << "," << v.y << ")" << endl;
+	stream << "(" << v.x << "," << v.y << ")";
 	return stream;
 }

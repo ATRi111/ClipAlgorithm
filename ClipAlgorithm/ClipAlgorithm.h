@@ -8,7 +8,7 @@ class ClipAlgorithm : public Solution
 {
 public:
 	TestAnswer* Run(TestCase* t) override;
-	std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
+	virtual std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
 };
 
 struct TestAnswer_Clip : TestAnswer

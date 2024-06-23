@@ -9,7 +9,7 @@ int main()
 	Vector2 v1 = Vector2(0, 1);
 	Vector2 v2 = Vector2(-1, 1);
 	v2 = v2 + v1;
-
+	cout << v2 << endl;
 	int n = 10000;
 	vector<TestCase*> set;
 	for (int i = 0; i < n; i++)
