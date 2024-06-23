@@ -5,7 +5,7 @@
 
 struct TestCase
 {
-
+	virtual ~TestCase();
 };
 struct TestAnswer
 {

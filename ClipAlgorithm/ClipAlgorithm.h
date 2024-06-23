@@ -11,6 +11,13 @@ public:
 	virtual std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
 };
 
+struct TestCase_Clip : TestCase
+{
+	float xMin, xMax, yMin, yMax;
+	Vector2 p1, p2;
+	TestCase_Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
+};
+
 struct TestAnswer_Clip : TestAnswer
 {
 	static const float Epsilon;

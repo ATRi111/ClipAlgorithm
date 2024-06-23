@@ -1,6 +1,7 @@
 #include "Stopwatch.h"
 using namespace std::chrono;
 
+#pragma region Stopwatch
 Stopwatch::Stopwatch() :nanoseconds(0), paused(false)
 {
 	timePoint = high_resolution_clock::now();
@@ -48,3 +49,4 @@ double Stopwatch::Milliseconds() const
 {
 	return NanoSeconds() / 1e6;
 }
+#pragma endregion

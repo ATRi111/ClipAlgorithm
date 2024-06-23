@@ -1,11 +1,21 @@
 #include "LiangBarskyAlgorithm.h"
 using namespace std;
 
+#pragma region LiangBarskyAlgorithm
+LiangBarskyAlgorithm* LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm()
+{
+    return new LiangBarskyAlgorithm();
+}
+
+LiangBarskyAlgorithm::LiangBarskyAlgorithm()
+    :uIn(0),uOut(1)
+{
+    uIn = 0;
+    uOut = 1;
+}
 vector<Vector2>* LiangBarskyAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
 {
     vector<Vector2>* result = new vector<Vector2>();
-    uIn = 0;
-    uOut = 1;
     r = p2 - p1;
     if (
         IntersectAndCheck(-r.x, p1.x - xMin)
@@ -19,11 +29,8 @@ vector<Vector2>* LiangBarskyAlgorithm::Clip(float xMin, float xMax, float yMin, 
     }
     return result;
 }
-
-
 bool LiangBarskyAlgorithm::IntersectAndCheck(float p, float q)
 {
-
     if (p < 0)
     {
         float u = q / p;
@@ -42,3 +49,4 @@ bool LiangBarskyAlgorithm::IntersectAndCheck(float p, float q)
         return q < 0;
     return true;
 }
+#pragma endregion

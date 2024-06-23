@@ -3,6 +3,14 @@
 #include<vector>
 using namespace std;
 
+#pragma region TestCase
+TestCase::~TestCase()
+{
+
+}
+#pragma endregion
+
+#pragma region TestAnswer
 TestAnswer::~TestAnswer()
 {
 
@@ -11,7 +19,9 @@ bool TestAnswer::Match(TestAnswer* other) const
 {
 	return true;
 }
+#pragma endregion
 
+#pragma region Solution
 Solution* Solution::CreateDefaultSolution()
 {
 	return new Solution();
@@ -28,9 +38,11 @@ TestAnswer* Solution::Run(TestCase* t)
 {
 	return new TestAnswer();
 }
+#pragma endregion
 
-TestLauncher::TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution*()>& CreateSolution)
-	:cases(cases),answers(answers),CreateSolution(CreateSolution)
+#pragma region TestLauncher
+TestLauncher::TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution* ()>& CreateSolution)
+	:cases(cases), answers(answers), CreateSolution(CreateSolution)
 {
 
 }
@@ -58,3 +70,4 @@ double TestLauncher::CorrectnessTest()
 	}
 	return sum / cases.size();
 }
+#pragma endregion

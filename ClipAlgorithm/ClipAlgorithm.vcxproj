@@ -129,10 +129,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ClipAlgorithm.h" />
+    <ClInclude Include="CohenSutherlandAlgorithm.h" />
     <ClInclude Include="LiangBarskyAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClipAlgorithm.cpp" />
+    <ClCompile Include="CohenSutherlandAlgorithm.cpp" />
     <ClCompile Include="LiangBarskyAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>

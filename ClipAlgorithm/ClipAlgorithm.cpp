@@ -2,16 +2,28 @@
 #include "Test.h"
 using namespace std;
 
+#pragma region ClipAlgorithm
 TestAnswer* ClipAlgorithm::Run(TestCase* t)
 {
-	return new TestAnswer_Clip();
+	TestCase_Clip* clip = dynamic_cast<TestCase_Clip*>(t);
+	vector<Vector2>* answer = Clip(clip->xMin, clip->xMax, clip->yMin, clip->yMax, clip->p1, clip->p2);
+	return new TestAnswer_Clip(answer);
 }
 vector<Vector2>* ClipAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
 {
 	return new vector<Vector2>();
 }
+#pragma endregion
 
+#pragma region TestCase_Clip
+TestCase_Clip::TestCase_Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
+	:xMin(xMin), xMax(xMax), yMin(yMin), yMax(yMax), p1(p1), p2(p2)
+{
 
+}
+#pragma endregion
+
+#pragma region TestAnswer_Clip
 const float TestAnswer_Clip::Epsilon = 0.01f;
 bool TestAnswer_Clip::Match(float a, float b)
 {
@@ -26,7 +38,7 @@ bool TestAnswer_Clip::Match(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2)
 	return Match(a1, b1) && Match(a2, b2) || Match(a1, b2) && Match(a2, b1);
 }
 
-TestAnswer_Clip::TestAnswer_Clip():answer(nullptr)
+TestAnswer_Clip::TestAnswer_Clip() :answer(nullptr)
 {
 
 }
@@ -49,12 +61,13 @@ bool TestAnswer_Clip::Match(TestAnswer* other) const
 
 	switch (a1.size())
 	{
-		case 0:
-			return a2.size() == 0;
-		case 2:
-			return a2.size() == 2 && Match(a1[0], a1[1], a2[0], a2[1]);
-		default:
-			return false;
+	case 0:
+		return a2.size() == 0;
+	case 2:
+		return a2.size() == 2 && Match(a1[0], a1[1], a2[0], a2[1]);
+	default:
+		return false;
 	}
 	return false;
 }
+#pragma endregion
