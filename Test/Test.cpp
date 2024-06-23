@@ -46,13 +46,17 @@ TestLauncher::TestLauncher(const std::vector<TestCase*>& cases, const std::vecto
 {
 
 }
-double TestLauncher::TimeTest()
+double TestLauncher::TimeTest(int repeatTimes = 1)
 {
 	double sum = 0.0;
-	for (int i = 0; i < cases.size(); i++)
+	for (int i = 0; i < repeatTimes; i++)
 	{
-		Solution* s = CreateSolution();
-		sum += s->TimeTest(cases[i]);
+		for (int i = 0; i < cases.size(); i++)
+		{
+			Solution* s = CreateSolution();
+			sum += s->TimeTest(cases[i]);
+			delete s;
+		}
 	}
 	return sum;
 }
@@ -67,6 +71,7 @@ double TestLauncher::CorrectnessTest()
 		TestAnswer* answer = s->Run(cases[i]);
 		sum += answers[i]->Match(answer);
 		delete answer;
+		delete s;
 	}
 	return sum / cases.size();
 }

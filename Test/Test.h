@@ -3,10 +3,12 @@
 #include<iostream>
 #include<functional>
 
+//Base class for all kinds of input
 struct TestCase
 {
 	virtual ~TestCase();
 };
+//Base class for all kinds of input output
 struct TestAnswer
 {
 	virtual ~TestAnswer();
@@ -16,8 +18,6 @@ struct TestAnswer
 //One Solution is used for solving one TestCase
 class Solution
 {
-protected:
-
 public:
 	static Solution* CreateDefaultSolution();
 	double TimeTest(TestCase* t);
@@ -32,6 +32,6 @@ class TestLauncher
 	std::function<Solution*()> CreateSolution;
 public:
 	TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution*()>& CreateSolution);
-	double TimeTest();
+	double TimeTest(int repeatTimes);
 	double CorrectnessTest();
 };
