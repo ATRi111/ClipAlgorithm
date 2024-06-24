@@ -24,7 +24,7 @@ TestCase_Clip::TestCase_Clip(float xMin, float xMax, float yMin, float yMax, Vec
 
 TestCase_Clip::~TestCase_Clip()
 {
-	cout << "deconstruct" << this << endl;
+
 }
 #pragma endregion
 
