@@ -8,6 +8,10 @@ TestCase::~TestCase()
 {
 
 }
+void TestCase::Print() const
+{
+	cout << endl;
+}
 #pragma endregion
 
 #pragma region TestAnswer
@@ -17,7 +21,11 @@ TestAnswer::~TestAnswer()
 }
 bool TestAnswer::Match(TestAnswer* other) const
 {
-	return true;
+	return other;
+}
+void TestAnswer::Print() const
+{
+	cout << endl;
 }
 #pragma endregion
 
@@ -64,7 +72,7 @@ double TestLauncher::TimeTest(int repeatTimes = 1)
 	}
 	return sum;
 }
-double TestLauncher::CorrectnessTest(int printTimes)
+double TestLauncher::CorrectnessTest(int printTimes = 3)
 {
 	if (answers.size() != cases.size())
 		return 0.0f;
@@ -72,11 +80,37 @@ double TestLauncher::CorrectnessTest(int printTimes)
 	for (int i = 0; i < cases.size(); i++)
 	{
 		Solution* s = CreateSolution();
-		TestAnswer* answer = s->Run(cases[i]);
-		sum += answers[i]->Match(answer);
-		delete answer;
+		TestAnswer* output = s->Run(cases[i]);
+		bool matched = answers[i] ? answers[i]->Match(output) : false;
+		sum += matched;
+		if (i < printTimes)
+			TestLauncher::Print(cases[i], answers[i], output, matched);
+		delete output;
 		delete s;
 	}
 	return sum / cases.size();
+}
+void TestLauncher::Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool matched)
+{
+	cout << "输入:";
+	if (c)
+		c->Print();
+	else
+		cout << "(nullptr)" << endl;
+	cout << "正确输出:";
+	if (answer)
+		answer->Print();
+	else
+		cout << "(nullptr)" << endl;
+	cout << "你的输出:";
+	if (output)
+		output->Print();
+	else
+		cout << "(nullptr)" << endl;
+	if (matched)
+		cout << "输出正确" << endl;
+	else
+		cout << "输出错误" << endl;
+	cout << endl;
 }
 #pragma endregion

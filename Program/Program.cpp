@@ -22,6 +22,7 @@ int main()
 		answers.push_back(nullptr);
 	}
 	TestLauncher l = TestLauncher(move(cases), move(answers), CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorithm);
+	l.CorrectnessTest(3);
 	for (int i = 0; i < 100; i++)
 	{
 		delete cases[i];

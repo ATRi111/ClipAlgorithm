@@ -26,6 +26,15 @@ TestCase_Clip::~TestCase_Clip()
 {
 
 }
+void TestCase_Clip::Print() const
+{
+	cout << "xMin=" << xMin << ",";
+	cout << "xMax=" << xMax << ",";
+	cout << "yMin=" << yMin << ",";
+	cout << "yMax=" << yMax << ",";
+	cout << "p1" << p1 << ",";
+	cout << "p2" << p2 << endl;
+}
 #pragma endregion
 
 #pragma region TestAnswer_Clip
@@ -74,5 +83,21 @@ bool TestAnswer_Clip::Match(TestAnswer* other) const
 		return false;
 	}
 	return false;
+}
+void TestAnswer_Clip::Print() const
+{
+	if (!answer)
+		cout << "(nullptr)" << endl;
+	else if (answer->size() == 0)
+		cout << "(¿ÕÊý×é)" << endl;
+	else
+	{
+		int i = 0;
+		for (int i = 0; i < answer->size(); i++)
+		{
+			cout << (*answer)[i] << " ";
+		}
+		cout << endl;
+	}
 }
 #pragma endregion

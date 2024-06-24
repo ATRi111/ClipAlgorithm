@@ -17,6 +17,7 @@ struct TestCase_Clip : TestCase
 	Vector2 p1, p2;
 	TestCase_Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
 	~TestCase_Clip();
+	void Print() const override;
 };
 
 struct TestAnswer_Clip : TestAnswer
@@ -31,4 +32,5 @@ struct TestAnswer_Clip : TestAnswer
 	TestAnswer_Clip(std::vector<Vector2>* answer);
 	virtual ~TestAnswer_Clip();
 	bool Match(TestAnswer* other) const override;
+	void Print() const override;
 };
