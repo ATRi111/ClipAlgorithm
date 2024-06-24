@@ -1,6 +1,7 @@
 ﻿#include"Test.h"
 #include"Stopwatch.h"
 #include<vector>
+#include<iomanip>
 using namespace std;
 
 #pragma region TestCase
@@ -25,7 +26,7 @@ bool TestAnswer::Match(TestAnswer* other) const
 }
 void TestAnswer::Print() const
 {
-	cout << endl;
+	cout << "(null)" << endl;
 }
 #pragma endregion
 
@@ -61,7 +62,7 @@ TestSet::~TestSet()
 double TestSet::TimeTest(int repeatTimes = 1)
 {
 	double sum = 0.0;
-	for (int i = 0; i < repeatTimes; i++)
+	for (int j = 0; j < repeatTimes; j++)
 	{
 		for (int i = 0; i < cases.size(); i++)
 		{
@@ -70,9 +71,11 @@ double TestSet::TimeTest(int repeatTimes = 1)
 			delete s;
 		}
 	}
+	cout << "运行" << repeatTimes * cases.size() << "次测试用例花费";
+	cout << std::fixed << std::setprecision(0) << sum << "毫秒" << endl;
 	return sum;
 }
-double TestSet::CorrectnessTest(int printTimes = 3)
+double TestSet::AccuracyTest(int printTimes = 3)
 {
 	if (answers.size() != cases.size())
 		return 0.0f;
@@ -88,7 +91,10 @@ double TestSet::CorrectnessTest(int printTimes = 3)
 		delete output;
 		delete s;
 	}
-	return sum / cases.size();
+	sum /= cases.size();
+	cout << "运行这" << cases.size() << "个测试用例的准确率为";
+	cout << std::fixed << std::setprecision(2) << sum * 100.0 << "%" << std::endl;
+	return sum;
 }
 void TestSet::GenerateAnswers()
 {

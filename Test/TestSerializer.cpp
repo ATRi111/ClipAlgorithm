@@ -15,8 +15,7 @@ TestSet TestSerializer::DeserializeFrom(string path) const
 	ifstream input(path, ios::in); 
 	if (!input.is_open())
 		throw "Cannot open" + path;
-	TestSet set = Deserialize(input);
-	return set;
+	return Deserialize(input);
 }
 #pragma endregion
 

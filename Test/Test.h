@@ -26,19 +26,19 @@ public:
 	virtual TestAnswer* Run(TestCase* t);
 };
 
-//one TestSet is used for measuring time and correctness of a set of Testcases
+//one TestSet is used for measuring time and accuracy of a set of Testcases
 class TestSet
 {
-	std::function<Solution*()> CreateSolution;
 	void Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool matched);
 public:	
 	std::vector<TestCase*> cases;
 	std::vector<TestAnswer*> answers;
+	std::function<Solution* ()> CreateSolution;
 	//both vectors must be allocated and deleted externally; each pointer in both vectors must be unique(or nullptr)
 	TestSet(std::vector<TestCase*>& cases, std::vector<TestAnswer*>& answers, const std::function<Solution*()>& CreateSolution);
 	~TestSet();
 	double TimeTest(int repeatTimes);
-	double CorrectnessTest(int printTimes);
+	double AccuracyTest(int printTimes);
 	//generate answers with given Solution
 	void GenerateAnswers();
 	//delete all pointers in answers then clear answers

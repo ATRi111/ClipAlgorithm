@@ -176,6 +176,6 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 		cases.push_back(c);
 		answers.push_back(points);
 	}
-	return TestSet(cases, answers, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
+	return TestSet(cases, answers, Solution::CreateDefaultSolution);
 }
 #pragma endregion
