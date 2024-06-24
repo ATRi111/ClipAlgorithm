@@ -28,9 +28,9 @@ struct TestAnswer_Clip : TestAnswer
 	bool static Match(Vector2 a, Vector2 b);
 	bool static Match(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2);
 
-	const std::vector<Vector2>* answer;
+	const std::vector<Vector2>* points;
 	TestAnswer_Clip();
-	TestAnswer_Clip(std::vector<Vector2>* answer);
+	TestAnswer_Clip(std::vector<Vector2>* points);
 	virtual ~TestAnswer_Clip();
 	bool Match(TestAnswer* other) const override;
 	void Print() const override;

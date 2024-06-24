@@ -7,8 +7,8 @@ using namespace std;
 TestAnswer* ClipAlgorithm::Run(TestCase* t)
 {
 	TestCase_Clip* clip = dynamic_cast<TestCase_Clip*>(t);
-	vector<Vector2>* answer = Clip(clip->xMin, clip->xMax, clip->yMin, clip->yMax, clip->p1, clip->p2);
-	return new TestAnswer_Clip(answer);
+	vector<Vector2>* points = Clip(clip->xMin, clip->xMax, clip->yMin, clip->yMax, clip->p1, clip->p2);
+	return new TestAnswer_Clip(points);
 }
 vector<Vector2>* ClipAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
 {
@@ -53,26 +53,26 @@ bool TestAnswer_Clip::Match(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2)
 	return Match(a1, b1) && Match(a2, b2) || Match(a1, b2) && Match(a2, b1);
 }
 
-TestAnswer_Clip::TestAnswer_Clip() :answer(nullptr)
+TestAnswer_Clip::TestAnswer_Clip() :points(nullptr)
 {
 
 }
-TestAnswer_Clip::TestAnswer_Clip(vector<Vector2>* answer) :answer(answer)
+TestAnswer_Clip::TestAnswer_Clip(vector<Vector2>* points) :points(points)
 {
 
 }
 TestAnswer_Clip::~TestAnswer_Clip()
 {
-	delete answer;
+	delete points;
 }
 bool TestAnswer_Clip::Match(TestAnswer* other) const
 {
 	TestAnswer_Clip* p = dynamic_cast<TestAnswer_Clip*>(other);
-	if (!p || !p->answer || !answer)
+	if (!p || !p->points || !points)
 		return false;
 
-	const std::vector<Vector2>& a1 = *answer;
-	const std::vector<Vector2>& a2 = *p->answer;
+	const std::vector<Vector2>& a1 = *points;
+	const std::vector<Vector2>& a2 = *p->points;
 
 	switch (a1.size())
 	{
@@ -87,16 +87,16 @@ bool TestAnswer_Clip::Match(TestAnswer* other) const
 }
 void TestAnswer_Clip::Print() const
 {
-	if (!answer)
+	if (!points)
 		cout << "(nullptr)" << endl;
-	else if (answer->empty())
+	else if (points->empty())
 		cout << "(空数组)" << endl;
 	else
 	{
 		int i = 0;
-		for (int i = 0; i < answer->size(); i++)
+		for (int i = 0; i < points->size(); i++)
 		{
-			cout << (*answer)[i] << " ";
+			cout << (*points)[i] << " ";
 		}
 		cout << endl;
 	}
@@ -106,7 +106,27 @@ void TestAnswer_Clip::Print() const
 #pragma region TestSerializer_Clip
 void TestSerializer_Clip::Serialize(std::ofstream& stream, const TestSet& set) const
 {
-
+	for (int i = 0; i < set.cases.size(); i++)
+	{
+		TestCase_Clip* c = dynamic_cast<TestCase_Clip*>(set.cases[i]);
+		TestAnswer_Clip* a = dynamic_cast<TestAnswer_Clip*>(set.answers[i]);
+		if (c && a)
+		{
+			stream << c->p1.x << " ";
+			stream << c->p1.y << " ";
+			stream << c->p2.x << " ";
+			stream << c->p2.y << " ";
+			if (a->points && !a->points->empty())
+			{
+				const vector<Vector2>& points = *(a->points);
+				stream << points[0].x << " ";
+				stream << points[0].y << " ";
+				stream << points[1].x << " ";
+				stream << points[1].y;
+			}
+			stream << endl;
+		}
+	}
 }
 
 TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
@@ -134,7 +154,7 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 		Vector2 p1, p2;
 		TestCase* c;
 		vector<Vector2>* vs = new vector<Vector2>();
-		TestAnswer* answer = new TestAnswer_Clip(vs);
+		TestAnswer* points = new TestAnswer_Clip(vs);
 		switch (fs.size())
 		{
 		case 4:
@@ -154,7 +174,7 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 		}
 		c = new TestCase_Clip(10, 20, 10, 20, p1, p2);
 		cases.push_back(c);
-		answers.push_back(answer);
+		answers.push_back(points);
 	}
 	return TestSet(cases, answers, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
 }

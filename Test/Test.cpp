@@ -117,7 +117,7 @@ void TestSet::DeleteCases()
 	}
 	cases.clear();
 }
-void TestSet::Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool matched)
+void TestSet::Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool matched)
 {
 	cout << "输入:";
 	if (c)
@@ -125,8 +125,8 @@ void TestSet::Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool ma
 	else
 		cout << "(nullptr)" << endl;
 	cout << "正确输出:";
-	if (answer)
-		answer->Print();
+	if (points)
+		points->Print();
 	else
 		cout << "(nullptr)" << endl;
 	cout << "你的输出:";
