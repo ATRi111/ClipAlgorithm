@@ -10,5 +10,5 @@ class LiangBarskyAlgorithm : public ClipAlgorithm
 public:
 	static LiangBarskyAlgorithm* CreateLiangBarskyAlgorithm();
 	LiangBarskyAlgorithm();
-	std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2) override;
+	bool Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2) override;
 };

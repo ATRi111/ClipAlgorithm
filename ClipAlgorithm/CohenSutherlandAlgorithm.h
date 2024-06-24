@@ -14,6 +14,6 @@ class CohenSutherlandAlgorithm : public ClipAlgorithm
 public:
 	static CohenSutherlandAlgorithm* CreateCohenSutherlandAlgorithm();
 	CohenSutherlandAlgorithm();
-	std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2) override;
+	bool Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2) override;
 };
 

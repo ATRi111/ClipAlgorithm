@@ -7,16 +7,18 @@ using namespace std;
 TestAnswer* ClipAlgorithm::Run(TestCase* t,Stopwatch* timer)
 {
 	TestCase_Clip* clip = dynamic_cast<TestCase_Clip*>(t);
+	Vector2 p1 = clip->p1;
+	Vector2 p2 = clip->p2;
 	if (timer)
 		timer->Start();
-	vector<Vector2>* points = Clip(clip->xMin, clip->xMax, clip->yMin, clip->yMax, clip->p1, clip->p2);
+	bool valid = Clip(clip->xMin, clip->xMax, clip->yMin, clip->yMax, p1, p2);
 	if (timer)
 		timer->Pause();
-	return new TestAnswer_Clip(points);
+	return new TestAnswer_Clip(p1, p2, valid);
 }
-vector<Vector2>* ClipAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
+bool ClipAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
 {
-	return new vector<Vector2>();
+	return false;
 }
 #pragma endregion
 
@@ -57,53 +59,33 @@ bool TestAnswer_Clip::Match(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2)
 	return Match(a1, b1) && Match(a2, b2) || Match(a1, b2) && Match(a2, b1);
 }
 
-TestAnswer_Clip::TestAnswer_Clip() :points(nullptr)
+TestAnswer_Clip::TestAnswer_Clip() 
+	:valid(false)
 {
 
 }
-TestAnswer_Clip::TestAnswer_Clip(vector<Vector2>* points) :points(points)
+TestAnswer_Clip::TestAnswer_Clip(Vector2 p1, Vector2 p2, bool valid)
+	:p1(p1), p2(p2), valid(valid)
 {
 
-}
-TestAnswer_Clip::~TestAnswer_Clip()
-{
-	delete points;
 }
 bool TestAnswer_Clip::Match(TestAnswer* other) const
 {
 	TestAnswer_Clip* p = dynamic_cast<TestAnswer_Clip*>(other);
-	if (!p || !p->points || !points)
+	if (!p || p->valid != valid)
 		return false;
 
-	const std::vector<Vector2>& a1 = *points;
-	const std::vector<Vector2>& a2 = *p->points;
+	if (!p->valid && !valid)
+		return true;
 
-	switch (a1.size())
-	{
-	case 0:
-		return a2.empty();
-	case 2:
-		return a2.size() == 2 && Match(a1[0], a1[1], a2[0], a2[1]);
-	default:
-		return false;
-	}
-	return false;
+	return Match(p1, p2, p->p1, p->p2);
 }
 void TestAnswer_Clip::Print() const
 {
-	if (!points)
-		cout << "(nullptr)" << endl;
-	else if (points->empty())
-		cout << "(空数组)" << endl;
+	if (!valid)
+		cout << "(不保留线段)" << endl;
 	else
-	{
-		int i = 0;
-		for (int i = 0; i < points->size(); i++)
-		{
-			cout << (*points)[i] << " ";
-		}
-		cout << endl;
-	}
+		cout << p1 << " " << p2 << endl;
 }
 #pragma endregion
 
@@ -120,13 +102,12 @@ void TestSerializer_Clip::Serialize(std::ofstream& stream, const TestSet& set) c
 			stream << c->p1.y << " ";
 			stream << c->p2.x << " ";
 			stream << c->p2.y << " ";
-			if (a->points && !a->points->empty())
+			if (a->valid)
 			{
-				const vector<Vector2>& points = *(a->points);
-				stream << points[0].x << " ";
-				stream << points[0].y << " ";
-				stream << points[1].x << " ";
-				stream << points[1].y;
+				stream << a->p1.x << " ";
+				stream << a->p1.y << " ";
+				stream << a->p2.x << " ";
+				stream << a->p2.y;
 			}
 			stream << endl;
 		}
@@ -158,18 +139,18 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 		Vector2 p1, p2;
 		TestCase* c;
 		vector<Vector2>* vs = new vector<Vector2>();
-		TestAnswer* points = new TestAnswer_Clip(vs);
+		TestAnswer* answer;
 		switch (fs.size())
 		{
 		case 4:
 			p1 = Vector2(fs[0], fs[1]);
 			p2 = Vector2(fs[2], fs[3]);
+			answer = new TestAnswer_Clip();
 			break;
 		case 8:
 			p1 = Vector2(fs[0], fs[1]);
 			p2 = Vector2(fs[2], fs[3]);
-			vs->emplace_back(fs[4], fs[5]);
-			vs->emplace_back(fs[6], fs[7]);
+			answer = new TestAnswer_Clip(Vector2(fs[4], fs[5]), Vector2(fs[6], fs[7]), true);
 			break;
 		default:
 			throw "InvalidArgument";
@@ -178,7 +159,7 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 		}
 		c = new TestCase_Clip(10, 20, 10, 20, p1, p2);
 		cases.push_back(c);
-		answers.push_back(points);
+		answers.push_back(answer);
 	}
 	return TestSet(cases, answers, Solution::CreateDefaultSolution);
 }

@@ -31,21 +31,3 @@ void TestCohenSutherlandAlgorithm(std::string path, int times)
 	std::cout << "CohenSutherland算法:" << std::endl;
 	Test(path, times, CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorithm);
 }
-
-
-class MyAlgorithm : public ClipAlgorithm
-{
-	//可以在这里定义成员变量
-public:
-	static MyAlgorithm* CreateMyAlgorithm()
-	{
-		return new MyAlgorithm();
-	}
-	std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2) override;
-};
-
-void TestMyAlgorithm(std::string path, int times)
-{
-	std::cout << "我的裁剪算法:" << std::endl;
-	Test(path, times, MyAlgorithm::CreateMyAlgorithm);
-}

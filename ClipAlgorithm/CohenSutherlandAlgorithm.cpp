@@ -12,9 +12,8 @@ CohenSutherlandAlgorithm::CohenSutherlandAlgorithm()
 {
 
 }
-vector<Vector2>* CohenSutherlandAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)
+bool CohenSutherlandAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
 {
-    vector<Vector2>* result = new vector<Vector2>();
     this->p1 = p1;
     this->xMin = xMin;
     this->xMax = xMax;
@@ -38,12 +37,7 @@ vector<Vector2>* CohenSutherlandAlgorithm::Clip(float xMin, float xMax, float yM
             code2 = Calculate(p2);
         }
     }
-    if ((code1 | code2) == 0)
-    {
-        result->push_back(p1);
-        result->push_back(p2);
-    }
-    return result;
+    return (code1 | code2) == 0;
 }
 
 int CohenSutherlandAlgorithm::Calculate(Vector2 p) const

@@ -10,7 +10,7 @@ class ClipAlgorithm : public Solution
 {
 public:
 	TestAnswer* Run(TestCase* t, Stopwatch* timer) override;
-	virtual std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
+	virtual bool Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2);
 };
 
 struct TestCase_Clip : TestCase
@@ -29,10 +29,10 @@ struct TestAnswer_Clip : TestAnswer
 	bool static Match(Vector2 a, Vector2 b);
 	bool static Match(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2);
 
-	const std::vector<Vector2>* points;
+	Vector2 p1, p2;
+	bool valid;
 	TestAnswer_Clip();
-	TestAnswer_Clip(std::vector<Vector2>* points);
-	virtual ~TestAnswer_Clip();
+	TestAnswer_Clip(Vector2 p1, Vector2 p2, bool valid);
 	bool Match(TestAnswer* other) const override;
 	void Print() const override;
 };
