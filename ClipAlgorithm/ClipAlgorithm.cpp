@@ -1,5 +1,6 @@
-#include "ClipAlgorithm.h"
-#include "Test.h"
+#include"ClipAlgorithm.h"
+#include"Test.h"
+#include"LiangBarskyAlgorithm.h"
 using namespace std;
 
 #pragma region ClipAlgorithm
@@ -76,7 +77,7 @@ bool TestAnswer_Clip::Match(TestAnswer* other) const
 	switch (a1.size())
 	{
 	case 0:
-		return a2.size() == 0;
+		return a2.empty();
 	case 2:
 		return a2.size() == 2 && Match(a1[0], a1[1], a2[0], a2[1]);
 	default:
@@ -88,7 +89,7 @@ void TestAnswer_Clip::Print() const
 {
 	if (!answer)
 		cout << "(nullptr)" << endl;
-	else if (answer->size() == 0)
+	else if (answer->empty())
 		cout << "(¿ÕÊý×é)" << endl;
 	else
 	{
@@ -99,5 +100,62 @@ void TestAnswer_Clip::Print() const
 		}
 		cout << endl;
 	}
+}
+#pragma endregion
+
+#pragma region TestSerializer_Clip
+void TestSerializer_Clip::Serialize(std::ofstream& stream, const TestSet& set) const
+{
+
+}
+
+TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
+{
+	std::vector<TestCase*>* cases = new std::vector<TestCase*>();
+	std::vector<TestAnswer*>* answers = new std::vector<TestAnswer*>();
+	string s;
+	while (getline(stream, s))
+	{
+		vector<string> ss = Split(s,' ');
+		vector<float> fs;
+		for (int i = 0; i < ss.size(); i++)
+		{
+			try
+			{
+				float f = stof(ss[i]);
+				fs.push_back(f);
+			}
+			catch(...)
+			{
+				continue;
+			}
+		}
+
+		Vector2 p1, p2;
+		TestCase* c;
+		vector<Vector2>* vs = new vector<Vector2>();
+		TestAnswer* answer = new TestAnswer_Clip(vs);
+		switch (fs.size())
+		{
+		case 4:
+			p1 = Vector2(fs[0], fs[1]);
+			p2 = Vector2(fs[2], fs[3]);
+			break;
+		case 8:
+			p1 = Vector2(fs[0], fs[1]);
+			p2 = Vector2(fs[2], fs[3]);
+			vs->emplace_back(fs[4], fs[5]);
+			vs->emplace_back(fs[6], fs[7]);
+			break;
+		default:
+			throw "InvalidArgument";
+			continue;
+			break;
+		}
+		c = new TestCase_Clip(10, 20, 10, 20, p1, p2);
+		cases->push_back(c);
+		answers->push_back(answer);
+	}
+	return TestSet(*cases, *answers, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
 }
 #pragma endregion

@@ -1,6 +1,7 @@
 #pragma once
 #include"Test.h"
 #include"Vector2.h"
+#include"TestSerializer.h"
 #include<vector>
 #include<iostream>
 
@@ -33,4 +34,11 @@ struct TestAnswer_Clip : TestAnswer
 	virtual ~TestAnswer_Clip();
 	bool Match(TestAnswer* other) const override;
 	void Print() const override;
+};
+
+class TestSerializer_Clip : public TestSerializer
+{
+public:
+	virtual void Serialize(std::ofstream& stream, const TestSet& set) const override;
+	virtual TestSet Deserialize(std::ifstream& stream) const override;
 };

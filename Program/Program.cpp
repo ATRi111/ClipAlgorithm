@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include<vector>
 #include"Vector2.h"
 #include"Test.h"
@@ -6,26 +7,14 @@
 #include"CohenSutherlandAlgorithm.h"
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-	TestCase_Clip* c = new TestCase_Clip(10, 20, 10, 20, Vector2(0, 0), Vector2(30, 30));
-	Solution* s = CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorithm();
+	string path = argv[0];
+	path = path.substr(0, path.find_last_of('\\')) + "\\Answer.txt";
+	TestSerializer_Clip serializer;
+	TestSet set = TestSet(serializer.DeserializeFrom(path));
 
-	vector<TestCase*> cases;
-	for (int i = 0; i < 100; i++)
-	{
-		cases.push_back(new TestCase_Clip(10, 20, 10, 20, Vector2(0, 0), Vector2(30, 30)));
-	}
-	vector<TestAnswer*> answers;
-	for (int i = 0; i < 100; i++)
-	{
-		answers.push_back(nullptr);
-	}
-	TestLauncher l = TestLauncher(move(cases), move(answers), CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorithm);
-	l.CorrectnessTest(3);
-	for (int i = 0; i < 100; i++)
-	{
-		delete cases[i];
-		delete answers[i];
-	}
+	set.CorrectnessTest(3);
+	set.DeleteAnswers();
+	set.DeleteCases();
 }

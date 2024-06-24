@@ -48,17 +48,17 @@ TestAnswer* Solution::Run(TestCase* t)
 }
 #pragma endregion
 
-#pragma region TestLauncher
-TestLauncher::TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution* ()>& CreateSolution)
+#pragma region TestSet
+TestSet::TestSet(vector<TestCase*>& cases, vector<TestAnswer*>& answers, const function<Solution* ()>& CreateSolution)
 	:cases(cases), answers(answers), CreateSolution(CreateSolution)
 {
 
 }
-TestLauncher::~TestLauncher()
+TestSet::~TestSet()
 {
 
 }
-double TestLauncher::TimeTest(int repeatTimes = 1)
+double TestSet::TimeTest(int repeatTimes = 1)
 {
 	double sum = 0.0;
 	for (int i = 0; i < repeatTimes; i++)
@@ -72,7 +72,7 @@ double TestLauncher::TimeTest(int repeatTimes = 1)
 	}
 	return sum;
 }
-double TestLauncher::CorrectnessTest(int printTimes = 3)
+double TestSet::CorrectnessTest(int printTimes = 3)
 {
 	if (answers.size() != cases.size())
 		return 0.0f;
@@ -84,13 +84,40 @@ double TestLauncher::CorrectnessTest(int printTimes = 3)
 		bool matched = answers[i] ? answers[i]->Match(output) : false;
 		sum += matched;
 		if (i < printTimes)
-			TestLauncher::Print(cases[i], answers[i], output, matched);
+			TestSet::Print(cases[i], answers[i], output, matched);
 		delete output;
 		delete s;
 	}
 	return sum / cases.size();
 }
-void TestLauncher::Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool matched)
+void TestSet::GenerateAnswers()
+{
+	DeleteAnswers();
+	for (int i = 0; i < cases.size(); i++)
+	{
+		Solution* s = CreateSolution();
+		TestAnswer* output = s->Run(cases[i]);
+		answers.push_back(output);
+		delete s;
+	}
+}
+void TestSet::DeleteAnswers()
+{
+	for (int i = 0; i < answers.size(); i++)
+	{
+		delete answers[i];
+	}
+	answers.clear();
+}
+void TestSet::DeleteCases()
+{
+	for (int i = 0; i < cases.size(); i++)
+	{
+		delete cases[i];
+	}
+	cases.clear();
+}
+void TestSet::Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool matched)
 {
 	cout << "ÊäÈë:";
 	if (c)

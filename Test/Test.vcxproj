@@ -129,10 +129,12 @@
   <ItemGroup>
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="Test.h" />
+    <ClInclude Include="TestSerializer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestSerializer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
