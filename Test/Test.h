@@ -2,6 +2,7 @@
 #include<vector>
 #include<iostream>
 #include<functional>
+#include"Stopwatch.h"
 
 //base class for all kinds of input
 struct TestCase
@@ -23,7 +24,7 @@ class Solution
 public:
 	static Solution* CreateDefaultSolution();
 	double TimeTest(TestCase* t);
-	virtual TestAnswer* Run(TestCase* t);
+	virtual TestAnswer* Run(TestCase* t,Stopwatch* timer);
 };
 
 //one TestSet is used for measuring time and accuracy of a set of Testcases

@@ -1,5 +1,4 @@
 ﻿#include"Test.h"
-#include"Stopwatch.h"
 #include<vector>
 #include<iomanip>
 using namespace std;
@@ -37,14 +36,17 @@ Solution* Solution::CreateDefaultSolution()
 }
 double Solution::TimeTest(TestCase* t)
 {
-	Stopwatch timer;
-	timer.Start();
-	Run(t);
-	timer.Pause();
+	Stopwatch timer(false);
+	Run(t, &timer);
 	return timer.Milliseconds();
 }
-TestAnswer* Solution::Run(TestCase* t)
+TestAnswer* Solution::Run(TestCase* t,Stopwatch* timer)
 {
+	if(timer)
+		timer->Start();
+
+	if (timer)
+		timer->Pause();
 	return new TestAnswer();
 }
 #pragma endregion
@@ -83,7 +85,7 @@ double TestSet::AccuracyTest(int printTimes = 3)
 	for (int i = 0; i < cases.size(); i++)
 	{
 		Solution* s = CreateSolution();
-		TestAnswer* output = s->Run(cases[i]);
+		TestAnswer* output = s->Run(cases[i], nullptr);
 		bool matched = answers[i] ? answers[i]->Match(output) : false;
 		sum += matched;
 		if (i < printTimes)
@@ -102,7 +104,7 @@ void TestSet::GenerateAnswers()
 	for (int i = 0; i < cases.size(); i++)
 	{
 		Solution* s = CreateSolution();
-		TestAnswer* output = s->Run(cases[i]);
+		TestAnswer* output = s->Run(cases[i], nullptr);
 		answers.push_back(output);
 		delete s;
 	}

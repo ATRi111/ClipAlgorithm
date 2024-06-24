@@ -4,10 +4,14 @@
 using namespace std;
 
 #pragma region ClipAlgorithm
-TestAnswer* ClipAlgorithm::Run(TestCase* t)
+TestAnswer* ClipAlgorithm::Run(TestCase* t,Stopwatch* timer)
 {
 	TestCase_Clip* clip = dynamic_cast<TestCase_Clip*>(t);
+	if (timer)
+		timer->Start();
 	vector<Vector2>* points = Clip(clip->xMin, clip->xMax, clip->yMin, clip->yMax, clip->p1, clip->p2);
+	if (timer)
+		timer->Pause();
 	return new TestAnswer_Clip(points);
 }
 vector<Vector2>* ClipAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2)

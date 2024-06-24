@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include"Test.h"
+#include"Stopwatch.h"
 #include"Vector2.h"
 #include"TestSerializer.h"
 #include<vector>
@@ -8,7 +9,7 @@
 class ClipAlgorithm : public Solution
 {
 public:
-	TestAnswer* Run(TestCase* t) override;
+	TestAnswer* Run(TestCase* t, Stopwatch* timer) override;
 	virtual std::vector<Vector2>* Clip(float xMin, float xMax, float yMin, float yMax, Vector2 p1, Vector2 p2);
 };
 
