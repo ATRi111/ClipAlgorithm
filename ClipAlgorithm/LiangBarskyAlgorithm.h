@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"ClipAlgorithm.h"
 #include"Vector2.h"
 

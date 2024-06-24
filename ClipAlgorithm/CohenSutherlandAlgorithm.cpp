@@ -1,4 +1,4 @@
-#include "CohenSutherlandAlgorithm.h"
+﻿#include "CohenSutherlandAlgorithm.h"
 using namespace std;
 
 #pragma region CohenSutherlandAlgorithm

@@ -29,8 +29,8 @@ public:
 //one TestSet is used for measuring time and correctness of a set of Testcases
 class TestSet
 {
-	std::vector<TestCase*>& cases;
-	std::vector<TestAnswer*>& answers;
+	std::vector<TestCase*> cases;
+	std::vector<TestAnswer*> answers;
 	std::function<Solution*()> CreateSolution;
 	void Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool matched);
 public:

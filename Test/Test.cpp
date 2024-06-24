@@ -1,4 +1,4 @@
-#include"Test.h"
+ï»¿#include"Test.h"
 #include"Stopwatch.h"
 #include<vector>
 using namespace std;
@@ -119,25 +119,25 @@ void TestSet::DeleteCases()
 }
 void TestSet::Print(TestCase* c, TestAnswer* answer, TestAnswer* output, bool matched)
 {
-	cout << "ÊäÈë:";
+	cout << "è¾“å…¥:";
 	if (c)
 		c->Print();
 	else
 		cout << "(nullptr)" << endl;
-	cout << "ÕýÈ·Êä³ö:";
+	cout << "æ­£ç¡®è¾“å‡º:";
 	if (answer)
 		answer->Print();
 	else
 		cout << "(nullptr)" << endl;
-	cout << "ÄãµÄÊä³ö:";
+	cout << "ä½ çš„è¾“å‡º:";
 	if (output)
 		output->Print();
 	else
 		cout << "(nullptr)" << endl;
 	if (matched)
-		cout << "Êä³öÕýÈ·" << endl;
+		cout << "è¾“å‡ºæ­£ç¡®" << endl;
 	else
-		cout << "Êä³ö´íÎó" << endl;
+		cout << "è¾“å‡ºé”™è¯¯" << endl;
 	cout << endl;
 }
 #pragma endregion

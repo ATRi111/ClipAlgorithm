@@ -1,4 +1,4 @@
-#include"ClipAlgorithm.h"
+ï»¿#include"ClipAlgorithm.h"
 #include"Test.h"
 #include"LiangBarskyAlgorithm.h"
 using namespace std;
@@ -90,7 +90,7 @@ void TestAnswer_Clip::Print() const
 	if (!answer)
 		cout << "(nullptr)" << endl;
 	else if (answer->empty())
-		cout << "(¿ÕÊý×é)" << endl;
+		cout << "(ç©ºæ•°ç»„)" << endl;
 	else
 	{
 		int i = 0;
@@ -111,8 +111,8 @@ void TestSerializer_Clip::Serialize(std::ofstream& stream, const TestSet& set) c
 
 TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 {
-	std::vector<TestCase*>* cases = new std::vector<TestCase*>();
-	std::vector<TestAnswer*>* answers = new std::vector<TestAnswer*>();
+	std::vector<TestCase*> cases;
+	std::vector<TestAnswer*> answers;
 	string s;
 	while (getline(stream, s))
 	{
@@ -153,9 +153,9 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 			break;
 		}
 		c = new TestCase_Clip(10, 20, 10, 20, p1, p2);
-		cases->push_back(c);
-		answers->push_back(answer);
+		cases.push_back(c);
+		answers.push_back(answer);
 	}
-	return TestSet(*cases, *answers, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
+	return TestSet(cases, answers, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
 }
 #pragma endregion

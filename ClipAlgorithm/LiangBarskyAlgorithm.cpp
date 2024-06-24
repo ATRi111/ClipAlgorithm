@@ -1,4 +1,4 @@
-#include "LiangBarskyAlgorithm.h"
+﻿#include "LiangBarskyAlgorithm.h"
 using namespace std;
 
 #pragma region LiangBarskyAlgorithm

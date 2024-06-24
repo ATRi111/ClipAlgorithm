@@ -1,4 +1,4 @@
-#include "Stopwatch.h"
+﻿#include "Stopwatch.h"
 using namespace std::chrono;
 
 #pragma region Stopwatch

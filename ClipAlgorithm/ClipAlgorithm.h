@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"Test.h"
 #include"Vector2.h"
 #include"TestSerializer.h"
