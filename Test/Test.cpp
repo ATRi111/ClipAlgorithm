@@ -41,10 +41,21 @@ TestAnswer* Solution::Run(TestCase* t)
 #pragma endregion
 
 #pragma region TestLauncher
-TestLauncher::TestLauncher(const std::vector<TestCase*>& cases, const std::vector<TestAnswer*>& answers, const std::function<Solution* ()>& CreateSolution)
+TestLauncher::TestLauncher(std::vector<TestCase*>&& cases, std::vector<TestAnswer*>&& answers, const std::function<Solution* ()>& CreateSolution)
 	:cases(cases), answers(answers), CreateSolution(CreateSolution)
 {
 
+}
+TestLauncher::~TestLauncher()
+{
+	for (int i = 0; i < cases.size(); i++)
+	{
+		delete cases[i];
+	}
+	for (int i = 0; i < answers.size(); i++)
+	{
+		delete answers[i];
+	}
 }
 double TestLauncher::TimeTest(int repeatTimes = 1)
 {
@@ -60,7 +71,7 @@ double TestLauncher::TimeTest(int repeatTimes = 1)
 	}
 	return sum;
 }
-double TestLauncher::CorrectnessTest()
+double TestLauncher::CorrectnessTest(int printTimes)
 {
 	if (answers.size() != cases.size())
 		return 0.0f;
