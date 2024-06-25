@@ -30,10 +30,6 @@ int main(int argc, char* argv[])
 	path = path.substr(0, path.find_last_of('\\')) + "\\Answer.txt";
 	int times = 100000;
 
-	Vector2 v(1, 2);
-	v = v + v;
-	cout << v << endl;
-
 	TestCohenSutherlandAlgorithm(path, times);
 	TestLiangBarskyAlgorithm(path, times);
 	TestMyAlgorithm(path, times);
