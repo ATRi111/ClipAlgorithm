@@ -1,4 +1,4 @@
-#include "TestSet.h"
+ï»¿#include "TestSet.h"
 using namespace std;
 
 TestSet::TestSet(vector<TestCase*>& cases, vector<TestAnswer*>& answers, const function<Algorithm* ()>& CreateSolution)
@@ -22,8 +22,8 @@ double TestSet::TimeTest(int repeatTimes = 1)
 			delete s;
 		}
 	}
-	cout << "ÔËÐÐ" << repeatTimes * cases.size() << "´Î²âÊÔÓÃÀý»¨·Ñ";
-	cout << std::fixed << std::setprecision(0) << sum << "ºÁÃë" << endl;
+	cout << "è¿è¡Œ" << repeatTimes * cases.size() << "æ¬¡æµ‹è¯•ç”¨ä¾‹èŠ±è´¹";
+	cout << std::fixed << std::setprecision(0) << sum << "æ¯«ç§’" << endl;
 	return sum;
 }
 double TestSet::AccuracyTest(int printTimes = 3)
@@ -43,7 +43,7 @@ double TestSet::AccuracyTest(int printTimes = 3)
 		delete s;
 	}
 	sum /= cases.size();
-	cout << "ÔËÐÐÕâ" << cases.size() << "¸ö²âÊÔÓÃÀýµÄ×¼È·ÂÊÎª";
+	cout << "è¿è¡Œè¿™" << cases.size() << "ä¸ªæµ‹è¯•ç”¨ä¾‹çš„å‡†ç¡®çŽ‡ä¸º";
 	cout << std::fixed << std::setprecision(2) << sum * 100.0 << "%" << std::endl;
 	return sum;
 }
@@ -76,24 +76,24 @@ void TestSet::DeleteCases()
 }
 void TestSet::Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool matched)
 {
-	cout << "ÊäÈë:";
+	cout << "è¾“å…¥:";
 	if (c)
 		c->Print();
 	else
 		cout << "(nullptr)" << endl;
-	cout << "ÕýÈ·Êä³ö:";
+	cout << "æ­£ç¡®è¾“å‡º:";
 	if (points)
 		points->Print();
 	else
 		cout << "(nullptr)" << endl;
-	cout << "ÄãµÄÊä³ö:";
+	cout << "ä½ çš„è¾“å‡º:";
 	if (output)
 		output->Print();
 	else
 		cout << "(nullptr)" << endl;
 	if (matched)
-		cout << "Êä³öÕýÈ·" << endl;
+		cout << "è¾“å‡ºæ­£ç¡®" << endl;
 	else
-		cout << "Êä³ö´íÎó" << endl;
+		cout << "è¾“å‡ºé”™è¯¯" << endl;
 	cout << endl;
 }

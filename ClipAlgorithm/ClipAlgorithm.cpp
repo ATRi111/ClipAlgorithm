@@ -134,20 +134,16 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 			}
 		}
 
-		Vector2 p1, p2;
 		TestCase* c;
-		vector<Vector2>* vs = new vector<Vector2>();
 		TestAnswer* answer;
 		switch (fs.size())
 		{
 		case 4:
-			p1 = Vector2(fs[0], fs[1]);
-			p2 = Vector2(fs[2], fs[3]);
+			c = new TestCase_Clip(10, 20, 10, 20, Vector2(fs[0], fs[1]), Vector2(fs[2], fs[3]));
 			answer = new TestAnswer_Clip();
 			break;
 		case 8:
-			p1 = Vector2(fs[0], fs[1]);
-			p2 = Vector2(fs[2], fs[3]);
+			c = new TestCase_Clip(10, 20, 10, 20, Vector2(fs[0], fs[1]), Vector2(fs[2], fs[3]));
 			answer = new TestAnswer_Clip(Vector2(fs[4], fs[5]), Vector2(fs[6], fs[7]), true);
 			break;
 		default:
@@ -155,7 +151,6 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 			continue;
 			break;
 		}
-		c = new TestCase_Clip(10, 20, 10, 20, p1, p2);
 		cases.push_back(c);
 		answers.push_back(answer);
 	}

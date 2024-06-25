@@ -14,12 +14,11 @@ public:
 	//否则，将p1，p2更新为最终保留线段的两端点（无顺序要求，误差在±0.01以内），然后返回true
 	bool Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2) override
 	{
-
-		return false;
+		return false;	//完成这个函数
 	}
 };
 
-void TestMyAlgorithm(std::string path, int times)
+static void TestMyAlgorithm(std::string path, int times)
 {
 	std::cout << "我的裁剪算法:" << std::endl;
 	Test(path, times, MyAlgorithm::CreateMyAlgorithm);
@@ -30,6 +29,10 @@ int main(int argc, char* argv[])
 	string path = argv[0];
 	path = path.substr(0, path.find_last_of('\\')) + "\\Answer.txt";
 	int times = 100000;
+
+	Vector2 v(1, 2);
+	v = v + v;
+	cout << v << endl;
 
 	TestCohenSutherlandAlgorithm(path, times);
 	TestLiangBarskyAlgorithm(path, times);

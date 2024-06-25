@@ -16,4 +16,3 @@ public:
 	long long NanoSeconds() const;
 	double Milliseconds() const;
 };
-
