@@ -24,7 +24,7 @@
     <ClInclude Include="TestSerializer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Algorithm.h">
+    <ClInclude Include="TestSet.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClCompile Include="TestSerializer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Algorithm.cpp">
+    <ClCompile Include="TestSet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

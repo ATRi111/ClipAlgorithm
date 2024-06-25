@@ -7,7 +7,7 @@
 #include"ClipAlgorithm.h"
 #include"LiangBarskyAlgorithm.h"
 #include"CohenSutherlandAlgorithm.h"
-#include"Algorithm.h"
+#include"TestSet.h"
 
 void Test(std::string path, int times, const std::function<Algorithm* ()>& CreateSolution)
 {

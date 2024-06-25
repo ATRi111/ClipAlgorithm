@@ -3,7 +3,7 @@
 #include"Stopwatch.h"
 #include"Vector2.h"
 #include"TestSerializer.h"
-#include"Algorithm.h"
+#include"TestSet.h"
 #include<vector>
 #include<iostream>
 

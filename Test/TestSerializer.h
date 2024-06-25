@@ -3,7 +3,7 @@
 #include<fstream>
 #include<ios>
 #include<string>
-#include"Test.h"
+#include"TestSet.h"
 
 class TestSerializer
 {

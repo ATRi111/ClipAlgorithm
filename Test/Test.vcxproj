@@ -127,13 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Algorithm.h" />
+    <ClInclude Include="TestSet.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="TestSerializer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Algorithm.cpp" />
+    <ClCompile Include="TestSet.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TestSerializer.cpp" />
