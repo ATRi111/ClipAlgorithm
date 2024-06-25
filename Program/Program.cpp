@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 {
 	string path = argv[0];
 	path = path.substr(0, path.find_last_of('\\')) + "\\Answer.txt";
-	int times = 10000;
+	int times = 100000;
 
 	TestCohenSutherlandAlgorithm(path, times);
 	TestLiangBarskyAlgorithm(path, times);
