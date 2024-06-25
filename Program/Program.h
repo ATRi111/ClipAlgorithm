@@ -1,12 +1,15 @@
 ﻿#pragma once
 #include<string>
+#include<iostream>
+#include<vector>
 #include"Vector2.h"
 #include"Test.h"
 #include"ClipAlgorithm.h"
 #include"LiangBarskyAlgorithm.h"
 #include"CohenSutherlandAlgorithm.h"
+#include"Algorithm.h"
 
-void Test(std::string path, int times, const std::function<Solution* ()>& CreateSolution)
+void Test(std::string path, int times, const std::function<Algorithm* ()>& CreateSolution)
 {
 	TestSerializer_Clip serializer;
 	TestSet set = TestSet(serializer.DeserializeFrom(path));

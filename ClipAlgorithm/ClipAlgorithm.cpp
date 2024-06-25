@@ -1,6 +1,4 @@
 ﻿#include"ClipAlgorithm.h"
-#include"Test.h"
-#include"LiangBarskyAlgorithm.h"
 using namespace std;
 
 #pragma region ClipAlgorithm
@@ -161,6 +159,6 @@ TestSet TestSerializer_Clip::Deserialize(std::ifstream& stream) const
 		cases.push_back(c);
 		answers.push_back(answer);
 	}
-	return TestSet(cases, answers, Solution::CreateDefaultSolution);
+	return TestSet(cases, answers, Algorithm::CreateDefault);
 }
 #pragma endregion

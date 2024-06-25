@@ -15,7 +15,6 @@ LiangBarskyAlgorithm::LiangBarskyAlgorithm()
 }
 bool LiangBarskyAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
 {
-    vector<Vector2>* result = new vector<Vector2>();
     r = p2 - p1;
     bool valid =
         IntersectAndCheck(-r.x, p1.x - xMin)

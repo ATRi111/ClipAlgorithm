@@ -29,30 +29,8 @@ void TestAnswer::Print() const
 }
 #pragma endregion
 
-#pragma region Solution
-Solution* Solution::CreateDefaultSolution()
-{
-	return new Solution();
-}
-double Solution::TimeTest(TestCase* t)
-{
-	Stopwatch timer(false);
-	Run(t, &timer);
-	return timer.Milliseconds();
-}
-TestAnswer* Solution::Run(TestCase* t,Stopwatch* timer)
-{
-	if(timer)
-		timer->Start();
-
-	if (timer)
-		timer->Pause();
-	return new TestAnswer();
-}
-#pragma endregion
-
 #pragma region TestSet
-TestSet::TestSet(vector<TestCase*>& cases, vector<TestAnswer*>& answers, const function<Solution* ()>& CreateSolution)
+TestSet::TestSet(vector<TestCase*>& cases, vector<TestAnswer*>& answers, const function<Algorithm* ()>& CreateSolution)
 	:cases(cases), answers(answers), CreateSolution(CreateSolution)
 {
 
@@ -68,7 +46,7 @@ double TestSet::TimeTest(int repeatTimes = 1)
 	{
 		for (int i = 0; i < cases.size(); i++)
 		{
-			Solution* s = CreateSolution();
+			Algorithm* s = CreateSolution();
 			sum += s->TimeTest(cases[i]);
 			delete s;
 		}
@@ -84,7 +62,7 @@ double TestSet::AccuracyTest(int printTimes = 3)
 	double sum = 0.0;
 	for (int i = 0; i < cases.size(); i++)
 	{
-		Solution* s = CreateSolution();
+		Algorithm* s = CreateSolution();
 		TestAnswer* output = s->Run(cases[i], nullptr);
 		bool matched = answers[i] ? answers[i]->Match(output) : false;
 		sum += matched;
@@ -103,7 +81,7 @@ void TestSet::GenerateAnswers()
 	DeleteAnswers();
 	for (int i = 0; i < cases.size(); i++)
 	{
-		Solution* s = CreateSolution();
+		Algorithm* s = CreateSolution();
 		TestAnswer* output = s->Run(cases[i], nullptr);
 		answers.push_back(output);
 		delete s;
@@ -149,3 +127,24 @@ void TestSet::Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool ma
 	cout << endl;
 }
 #pragma endregion
+
+
+Algorithm* Algorithm::CreateDefault()
+{
+	return new Algorithm();
+}
+double Algorithm::TimeTest(TestCase* t)
+{
+	Stopwatch timer(false);
+	Run(t, &timer);
+	return timer.Milliseconds();
+}
+TestAnswer* Algorithm::Run(TestCase* t, Stopwatch* timer)
+{
+	if (timer)
+		timer->Start();
+
+	if (timer)
+		timer->Pause();
+	return new TestAnswer();
+}

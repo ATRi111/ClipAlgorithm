@@ -16,4 +16,3 @@ public:
 	CohenSutherlandAlgorithm();
 	bool Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2) override;
 };
-

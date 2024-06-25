@@ -3,10 +3,11 @@
 #include"Stopwatch.h"
 #include"Vector2.h"
 #include"TestSerializer.h"
+#include"Algorithm.h"
 #include<vector>
 #include<iostream>
 
-class ClipAlgorithm : public Solution
+class ClipAlgorithm : public Algorithm
 {
 public:
 	TestAnswer* Run(TestCase* t, Stopwatch* timer) override;
