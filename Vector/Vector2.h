@@ -31,6 +31,27 @@ struct Vector2
 	{
 		return x == v.x && y == v.y;
 	}
+	Vector2 operator+(const Vector2& other) const
+	{
+		return Vector2(x + other.x, y + other.y);
+	}
+	Vector2 operator-() const
+	{
+		return Vector2(-x, -y);
+	}
+	Vector2 operator-(const Vector2& other) const
+	{
+		return Vector2(x - other.x, y - other.y);
+	}
+	Vector2 operator*(float f) const
+	{
+		return Vector2(f * x, f * y);
+	}
+	Vector2 operator/(float f) const
+	{
+		return Vector2(x / f, y / f);
+	}
+
 	float SqrMagnitude() const
 	{
 		return x * x + y * y;
@@ -39,7 +60,6 @@ struct Vector2
 	{
 		return sqrtf(x * x + y * y);
 	}
-
 	Vector2& Normalized()
 	{
 		float f = Magnitude();
@@ -59,9 +79,12 @@ struct Vector2
 	}
 }; 
 
-Vector2 operator+(const Vector2& a, const Vector2& b);
-Vector2 operator-(const Vector2& a, const Vector2& b);
-Vector2 operator*(float f, const Vector2& v);
-Vector2 operator*(const Vector2& v, float f);
-Vector2 operator/(const Vector2& v, float f);
-std::ostream& operator<<(std::ostream& stream, const Vector2& v);
+inline Vector2 operator*(float f, const Vector2& v)
+{
+	return Vector2(f * v.x, f * v.y);
+}
+inline std::ostream& operator<<(std::ostream& stream, const Vector2& v)
+{
+	stream << "(" << v.x << "," << v.y << ")";
+	return stream;
+}
