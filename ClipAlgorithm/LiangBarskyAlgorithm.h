@@ -5,7 +5,7 @@
 class LiangBarskyAlgorithm : public ClipAlgorithm 
 {
 	Vector2 r;
-	bool IntersectAndCheck(float p, float q);
+	bool IntersectAndCheck(float p, float q1, float q2);
 	float uIn, uOut;
 public:
 	static LiangBarskyAlgorithm* CreateLiangBarskyAlgorithm();

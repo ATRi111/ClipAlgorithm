@@ -16,33 +16,41 @@ LiangBarskyAlgorithm::LiangBarskyAlgorithm()
 bool LiangBarskyAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
 {
     r = p2 - p1;
-    bool valid =
-        IntersectAndCheck(-r.x, p1.x - xMin)
-        && IntersectAndCheck(r.x, xMax - p1.x)
-        && IntersectAndCheck(-r.y, p1.y - yMin)
-        && IntersectAndCheck(r.y, yMax - p1.y);
-    p2 = p1 + uOut * r;
-    p1 = p1 + uIn * r;
-    return valid;
+    if (IntersectAndCheck(r.x, xMax - p1.x, p1.x - xMin)
+        && IntersectAndCheck(r.y, yMax - p1.y, p1.y - yMin))
+    {
+        p2 = p1 + uOut * r;
+        p1 = p1 + uIn * r;
+        return true;
+    }
+    return false;
 }
-bool LiangBarskyAlgorithm::IntersectAndCheck(float p, float q)
+bool LiangBarskyAlgorithm::IntersectAndCheck(float p,float q1,float q2)
 {
     if (p < 0)
     {
-        float u = q / p;
-        if (u > uOut)
+        float u1 = q1 / p;
+        if (u1 > uOut)
             return false;
-        uIn = max(uIn, u);
+        uIn = max(uIn, u1);
+        float u2 = q2 / (-p);
+        if (u2 < uIn)
+            return false;
+        uOut = min(uOut, u2);
     }
     else if (p > 0)
     {
-        float u = q / p;
-        if (u < uIn)
+        float u1 = q1 / p;
+        if (u1 < uIn)
             return false;
-        uOut = min(uOut, u);
+        uOut = min(uOut, u1);
+        float u2 = q2 / (-p);
+        if (u2 > uOut)
+            return false;
+        uIn = max(uIn, u2);
     }
     else
-        return q < 0;
+        return q1 < 0 && q2 < 0;
     return true;
 }
 #pragma endregion
