@@ -22,9 +22,11 @@ bool CohenSutherlandAlgorithm::Clip(float xMin, float xMax, float yMin, float yM
     r = p2 - p1;
     code1 = Calculate(p1);
     code2 = Calculate(p2);
-    while ((code1 | code2) != 0 && (code1 & code2) == 0)
+    while (!(code1 & code2))
     {
-        if (code1 != 0)
+        if (!(code1 | code2))
+            return true;
+        if (code1)
         {
             int last = code1 & ((~code1) + 1);
             p1 = Intersect(last);
@@ -37,7 +39,7 @@ bool CohenSutherlandAlgorithm::Clip(float xMin, float xMax, float yMin, float yM
             code2 = Calculate(p2);
         }
     }
-    return (code1 | code2) == 0;
+    return false;
 }
 
 int CohenSutherlandAlgorithm::Calculate(Vector2 p) const

@@ -32,7 +32,7 @@ bool LiangBarskyAlgorithm::IntersectAndCheck(float p,float q1,float q2)
         float u1 = q1 / p;
         if (u1 > uOut)
             return false;
-        uIn = max(uIn, u1);
+        uIn = max(uIn, u1);    
         float u2 = q2 / (-p);
         if (u2 < uIn)
             return false;
