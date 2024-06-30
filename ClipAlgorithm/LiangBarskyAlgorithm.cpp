@@ -7,14 +7,10 @@ LiangBarskyAlgorithm* LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm()
     return new LiangBarskyAlgorithm();
 }
 
-LiangBarskyAlgorithm::LiangBarskyAlgorithm()
-    :uIn(0),uOut(1)
+bool LiangBarskyAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
 {
     uIn = 0;
     uOut = 1;
-}
-bool LiangBarskyAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
-{
     r = p2 - p1;
     if (IntersectAndCheck(r.x, xMax - p1.x, p1.x - xMin)
         && IntersectAndCheck(r.y, yMax - p1.y, p1.y - yMin))

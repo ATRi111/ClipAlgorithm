@@ -7,11 +7,6 @@ CohenSutherlandAlgorithm* CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorit
     return new CohenSutherlandAlgorithm();
 }
 
-CohenSutherlandAlgorithm::CohenSutherlandAlgorithm()
-    :xMin(0),xMax(0),yMin(0),yMax(0),code1(0),code2(0)
-{
-
-}
 bool CohenSutherlandAlgorithm::Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2)
 {
     this->p1 = p1;

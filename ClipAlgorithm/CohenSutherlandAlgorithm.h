@@ -13,6 +13,5 @@ class CohenSutherlandAlgorithm : public ClipAlgorithm
 	Vector2 IntersectX(float x) const;
 public:
 	static CohenSutherlandAlgorithm* CreateCohenSutherlandAlgorithm();
-	CohenSutherlandAlgorithm();
 	bool Clip(float xMin, float xMax, float yMin, float yMax, Vector2& p1, Vector2& p2) override;
 };
