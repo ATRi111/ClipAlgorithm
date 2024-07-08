@@ -27,6 +27,9 @@
     <ClInclude Include="TestSet.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Testframework.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp">

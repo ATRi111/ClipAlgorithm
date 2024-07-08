@@ -3,11 +3,10 @@
 #include<iostream>
 #include<vector>
 #include"Vector2.h"
-#include"Test.h"
+#include"Testframework.h"
 #include"ClipAlgorithm.h"
 #include"LiangBarskyAlgorithm.h"
 #include"CohenSutherlandAlgorithm.h"
-#include"TestSet.h"
 
 void Test(std::string path, int times, const std::function<Algorithm* ()>& CreateSolution)
 {

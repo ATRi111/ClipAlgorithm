@@ -1,9 +1,7 @@
 ﻿#pragma once
-#include"Test.h"
 #include"Stopwatch.h"
 #include"Vector2.h"
-#include"TestSerializer.h"
-#include"TestSet.h"
+#include"Testframework.h"
 #include<vector>
 #include<iostream>
 
