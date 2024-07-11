@@ -10,6 +10,8 @@ class Vector3
 	const static Vector3 Down;
 	const static Vector3 Right;
 	const static Vector3 Left;
+	const static Vector3 Front;
+	const static Vector3 Back;
 
 	union
 	{
