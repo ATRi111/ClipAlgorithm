@@ -2,6 +2,10 @@
 using namespace std;
 
 #pragma region LiangBarskyAlgorithm
+LiangBarskyAlgorithm::LiangBarskyAlgorithm()
+    :uIn(0),uOut(1)
+{
+}
 LiangBarskyAlgorithm* LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm()
 {
     return new LiangBarskyAlgorithm();
