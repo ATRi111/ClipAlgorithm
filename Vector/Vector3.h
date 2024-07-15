@@ -2,7 +2,7 @@
 #include<iostream>
 #include"Vector2.h"
 
-class Vector3
+struct Vector3
 {
 	const static Vector3 Zero;
 	const static Vector3 One;
