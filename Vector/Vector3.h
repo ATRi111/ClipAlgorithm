@@ -65,7 +65,7 @@ struct Vector3
 	}
 	Vector3 operator*(float f) const
 	{
-		return Vector3(f * x, f * y);
+		return Vector3(f * x, f * y, f * z);
 	}
 	Vector3 operator/(float f) const
 	{
@@ -80,7 +80,7 @@ struct Vector3
 	{
 		return sqrtf(x * x + y * y + z * z);
 	}
-	Vector3& Normalized()
+	Vector3& Normalize()
 	{
 		float f = Magnitude();
 		if (f != 0)
@@ -91,7 +91,7 @@ struct Vector3
 		}
 		return *this;
 	}
-	Vector3 Normalized() const
+	Vector3 Normalize() const
 	{
 		float f = Magnitude();
 		if (f == 0)
@@ -99,3 +99,18 @@ struct Vector3
 		return Vector3(x / f, y / f, z / f);
 	}
 };
+
+inline Vector3 operator*(float f, const Vector3& v)
+{
+	return Vector3(f * v.x, f * v.y, f * v.z);
+}
+inline std::ostream& operator<<(std::ostream& stream, const Vector3& v)
+{
+	stream << "(" << v.x << "," << v.y << "," << v.z << ")";
+	return stream;
+}
+
+inline Vector3 Lerp(const Vector3& a, const Vector3& b, float t)
+{
+	return a + t * (b - a);
+}
