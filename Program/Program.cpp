@@ -19,7 +19,7 @@ public:
 static void TestMyAlgorithm(std::string path, int times)
 {
     std::cout << "我的裁剪算法:" << std::endl;
-    Test(path, times, MyAlgorithm::CreateMyAlgorithm);
+	Test(path, times, 3, MyAlgorithm::CreateMyAlgorithm);
 }
 
 //注意在Release而不是Debug模式下运行此程序

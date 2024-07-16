@@ -8,13 +8,13 @@
 #include"LiangBarskyAlgorithm.h"
 #include"CohenSutherlandAlgorithm.h"
 
-void Test(std::string path, int times, const std::function<Algorithm* ()>& CreateSolution)
+void Test(std::string path, int times,int printTimes, const std::function<Algorithm* ()>& CreateSolution)
 {
 	TestSerializer_Clip serializer;
 	TestSet set = TestSet(serializer.DeserializeFrom(path));
 	set.CreateSolution = CreateSolution;
 
-	set.AccuracyTest(3);
+	set.AccuracyTest(printTimes);
 	set.TimeTest(times);
 
 	set.DeleteAnswers();
@@ -25,11 +25,11 @@ void Test(std::string path, int times, const std::function<Algorithm* ()>& Creat
 void TestLiangBarskyAlgorithm(std::string path, int times)
 {
 	std::cout << "LiangBarsky算法:" << std::endl;
-	Test(path, times, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
+	Test(path, times, 0, LiangBarskyAlgorithm::CreateLiangBarskyAlgorithm);
 }
 
 void TestCohenSutherlandAlgorithm(std::string path, int times)
 {
 	std::cout << "CohenSutherland算法:" << std::endl;
-	Test(path, times, CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorithm);
+	Test(path, times, 0, CohenSutherlandAlgorithm::CreateCohenSutherlandAlgorithm);
 }
