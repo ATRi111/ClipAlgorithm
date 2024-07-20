@@ -29,7 +29,9 @@ int main(int argc, char* argv[])
 	path = path.substr(0, path.find("\\x64\\")) + "\\Answer.txt";
 	int times = 100000;		//控制算法运行次数；测试集中包含100个测试用例，则总运行次数=times×100
 
+	system("title 裁剪算法");
 	TestCohenSutherlandAlgorithm(path, times);
 	TestLiangBarskyAlgorithm(path, times);
 	TestMyAlgorithm(path, times);
+	system("pause");
 }
