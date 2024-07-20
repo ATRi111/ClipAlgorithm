@@ -8,7 +8,7 @@
 //one TestSet is used for measuring time and accuracy of a set of Testcases
 class TestSet
 {
-	void Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool matched);
+	void Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool matched, bool guaranteed);
 public:
 	std::vector<TestCase*> cases;
 	std::vector<TestAnswer*> answers;
@@ -17,7 +17,7 @@ public:
 	TestSet(std::vector<TestCase*>& cases, std::vector<TestAnswer*>& answers, const std::function<Algorithm* ()>& CreateSolution);
 	~TestSet();
 	double TimeTest(int repeatTimes);
-	double AccuracyTest(int printTimes);
+	double AccuracyTest(int printTimes, bool guaranteed);
 	//generate answers with given Algorithm
 	void GenerateAnswers();
 	//delete all pointers in answers then clear answers

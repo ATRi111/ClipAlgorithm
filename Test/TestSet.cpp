@@ -26,7 +26,7 @@ double TestSet::TimeTest(int repeatTimes = 1)
 	cout << std::fixed << std::setprecision(0) << sum << "毫秒" << endl;
 	return sum;
 }
-double TestSet::AccuracyTest(int printTimes = 3)
+double TestSet::AccuracyTest(int printTimes = 3, bool guaranteed = false)
 {
 	if (answers.size() != cases.size())
 		return 0.0f;
@@ -38,7 +38,7 @@ double TestSet::AccuracyTest(int printTimes = 3)
 		bool matched = answers[i] ? answers[i]->Match(output) : false;
 		sum += matched;
 		if (i < printTimes)
-			TestSet::Print(cases[i], answers[i], output, matched);
+			TestSet::Print(cases[i], answers[i], output, matched, guaranteed);
 		delete output;
 		delete s;
 	}
@@ -74,26 +74,35 @@ void TestSet::DeleteCases()
 	}
 	cases.clear();
 }
-void TestSet::Print(TestCase* c, TestAnswer* points, TestAnswer* output, bool matched)
+void TestSet::Print(TestCase* c, TestAnswer* a, TestAnswer* output, bool matched, bool guaranteed = false)
 {
 	cout << "输入:";
 	if (c)
 		c->Print();
 	else
 		cout << "(nullptr)" << endl;
-	cout << "正确输出:";
-	if (points)
-		points->Print();
-	else
-		cout << "(nullptr)" << endl;
-	cout << "你的输出:";
+
+
+	if (!guaranteed)
+	{
+		cout << "答案:";
+		if (a)
+			a->Print();
+		else
+			cout << "(nullptr)" << endl;
+	}
+	cout << "输出:";
 	if (output)
 		output->Print();
 	else
 		cout << "(nullptr)" << endl;
-	if (matched)
-		cout << "输出正确" << endl;
-	else
-		cout << "输出错误" << endl;
+
+	if (!guaranteed)
+	{
+		if (matched)
+			cout << "输出正确" << endl;
+		else
+			cout << "输出错误" << endl;
+	}
 	cout << endl;
 }
