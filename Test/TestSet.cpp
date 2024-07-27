@@ -26,7 +26,7 @@ double TestSet::TimeTest(int repeatTimes = 1)
 	cout << std::fixed << std::setprecision(0) << sum << "毫秒" << endl;
 	return sum;
 }
-double TestSet::AccuracyTest(int printTimes = 3, bool guaranteed = false)
+double TestSet::AccuracyTest(int printTimes = 3, bool guranteed = false)
 {
 	if (answers.size() != cases.size())
 		return 0.0f;
@@ -38,13 +38,16 @@ double TestSet::AccuracyTest(int printTimes = 3, bool guaranteed = false)
 		bool matched = answers[i] ? answers[i]->Match(output) : false;
 		sum += matched;
 		if (i < printTimes)
-			TestSet::Print(cases[i], answers[i], output, matched, guaranteed);
+			TestSet::Print(cases[i], answers[i], output, matched, guranteed);
 		delete output;
 		delete s;
 	}
 	sum /= cases.size();
-	cout << "运行这" << cases.size() << "个测试用例的准确率为";
-	cout << std::fixed << std::setprecision(2) << sum * 100.0 << "%" << std::endl;
+	if (!guranteed)
+	{
+		cout << "运行这" << cases.size() << "个测试用例的准确率为";
+		cout << std::fixed << std::setprecision(2) << sum * 100.0 << "%" << std::endl;
+	}
 	return sum;
 }
 void TestSet::GenerateAnswers()
