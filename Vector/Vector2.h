@@ -60,7 +60,7 @@ struct Vector2
 	{
 		return sqrtf(x * x + y * y);
 	}
-	Vector2& Normalized()
+	Vector2& Normalize()
 	{
 		float f = Magnitude();
 		if (f != 0)
@@ -77,7 +77,7 @@ struct Vector2
 			return Vector2::Zero;
 		return Vector2(x / f, y / f);
 	}
-}; 
+};
 
 inline Vector2 operator*(float f, const Vector2& v)
 {

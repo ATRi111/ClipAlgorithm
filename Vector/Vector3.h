@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include<iostream>
 #include"Vector2.h"
 
@@ -91,7 +91,7 @@ struct Vector3
 		}
 		return *this;
 	}
-	Vector3 Normalize() const
+	Vector3 Normalized() const
 	{
 		float f = Magnitude();
 		if (f == 0)
